@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ADMSS Client Web Site - Автомобильный каталог
 
-## Getting Started
+## Описание проекта
 
-First, run the development server:
+**ADMSS Client Web Site** - это современный веб-сайт для автомобильного дилера, построенный на Next.js 14 с использованием TypeScript. Сайт предоставляет полный каталог автомобилей с возможностью поиска, фильтрации и просмотра детальной информации о транспортных средствах.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Основные возможности
+
+### 🚗 Каталог автомобилей
+- Полный список доступных автомобилей с детальной информацией
+- Фильтрация по различным параметрам:
+  - Марка и модель
+  - Год выпуска
+  - Категория транспортного средства
+  - Ценовой диапазон
+  - Локация
+- Детальная страница каждого автомобиля с полной спецификацией
+
+### 🔍 Поиск и фильтрация
+- Интерактивная форма фильтров на главной странице
+- Динамическая загрузка доступных опций фильтрации
+- URL-параметры для сохранения состояния фильтров
+
+### 📞 Контактные формы
+- Форма обратной связи
+- Форма записи на тест-драйв
+- Интеграция с API для отправки сообщений
+
+### 🗺️ Интерактивная карта
+- Встроенная Google Maps с локацией дилера
+- Отображение адреса и контактной информации
+
+## Технический стек
+
+### Frontend
+- **Next.js 14** - React фреймворк с App Router
+- **TypeScript** - типизированный JavaScript
+- **React 18** - библиотека для создания пользовательских интерфейсов
+- **Bootstrap 5** - CSS фреймворк для адаптивного дизайна
+- **React Bootstrap** - React компоненты на основе Bootstrap
+
+### Стилизация
+- **CSS Modules** - для компонентных стилей
+- **Bootstrap** - для основного дизайна
+- **Custom CSS** - для кастомизации
+
+### API и данные
+- **REST API** - интеграция с ADMSS API
+- **Fetch API** - для HTTP запросов
+- **Server-side rendering** - для SEO оптимизации
+
+## Структура проекта
+
+```
+admss-client-web-site/
+├── app/                          # Основная директория Next.js App Router
+│   ├── api/                      # API роуты
+│   │   └── test-drive/           # API для тест-драйва
+│   ├── assets/                   # Статические ресурсы
+│   │   └── styles/               # CSS файлы
+│   ├── components/               # React компоненты
+│   │   ├── inventories-list/     # Список автомобилей
+│   │   └── ui/                   # UI компоненты
+│   ├── contacts/                 # Страница контактов
+│   ├── inventory/                # Детальные страницы автомобилей
+│   ├── models/                   # TypeScript интерфейсы
+│   ├── http/                     # HTTP клиент и API функции
+│   └── globals.css               # Глобальные стили
+├── public/                       # Публичные файлы
+│   └── img/                      # Изображения
+└── package.json                  # Зависимости проекта
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Модели данных
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Inventory (Автомобиль)
+Основная модель для хранения информации об автомобиле:
+- Технические характеристики (двигатель, трансмиссия, топливо)
+- Ценовая информация (стоимость, специальная цена)
+- Внешний вид (цвет, стиль кузова)
+- Медиа контент (фото, видео)
+- Статус и доступность
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Contact (Контакт)
+Модель для контактных форм с полями:
+- Имя, email, телефон
+- Сообщение
+- Тип обращения
 
-## Learn More
+## API интеграция
 
-To learn more about Next.js, take a look at the following resources:
+Проект интегрирован с ADMSS API для получения данных:
+- **Базовый URL**: `https://app.admss.com/api/v1/sites/`
+- **Аутентификация**: Basic Auth с API ключом
+- **Основные эндпоинты**:
+  - `/list` - получение списка автомобилей
+  - `/filter/*` - получение опций фильтрации
+  - `/item/{id}` - детальная информация об автомобиле
+  - `/message` - отправка контактных форм
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Установка и запуск
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Предварительные требования
+- Node.js 18+ 
+- npm или yarn
 
-## Deploy on Vercel
+### Установка зависимостей
+```bash
+npm install
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Запуск в режиме разработки
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Сайт будет доступен по адресу [http://localhost:3000](http://localhost:3000)
+
+### Сборка для продакшена
+```bash
+npm run build
+npm start
+```
+
+## Особенности реализации
+
+### SEO оптимизация
+- Server-side rendering для лучшей индексации
+- Метаданные для каждой страницы
+- Семантическая HTML разметка
+
+### Производительность
+- Оптимизированные изображения
+- Ленивая загрузка компонентов
+- Кэширование API запросов
+
+### Адаптивность
+- Мобильная версия сайта
+- Адаптивный дизайн на всех устройствах
+- Touch-friendly интерфейс
+
+## Лицензия
+
+Проект является приватным и предназначен для внутреннего использования.
+
+## Поддержка
+
+Для получения технической поддержки обращайтесь к команде разработки.
